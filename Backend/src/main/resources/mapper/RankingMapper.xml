@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.projectrecommend.dao.RankingDao">
+
+    <delete id="deleteByStudentAndProject">
+        DELETE FROM student_project_ranking
+        WHERE student_id = #{studentId} AND project_id = #{projectId}
+    </delete>
+
+    <insert id="insertRanking">
+        INSERT INTO student_project_ranking (student_id, project_id, priority)
+        VALUES (#{studentId}, #{projectId}, #{priority})
+    </insert>
+
+</mapper>

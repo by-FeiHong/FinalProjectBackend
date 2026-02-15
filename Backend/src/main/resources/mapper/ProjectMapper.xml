@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.projectrecommend.dao.ProjectDao">
+
+    <select id="findBySearch" resultType="com.example.projectrecommend.entity.Project">
+        SELECT index_number, project_id, supervisor_name, email, project_title,
+        project_type, application_area, project_nature, keywords,
+        project_description, main_task1, main_task2, main_task3, main_task4,
+        outcome1, outcome2, outcome3, skills_required,
+        resources_required, how_challenging
+        FROM project
+        <where>
+            <if test="params != null and params.supervisorName != null and params.supervisorName != ''">
+                AND supervisor_name LIKE concat('%', #{params.supervisorName}, '%')
+            </if>
+            <if test="params != null and params.projectTitle != null and params.projectTitle != ''">
+                AND project_title LIKE concat('%', #{params.projectTitle}, '%')
+            </if>
+            <if test="params != null and params.keywords != null and params.keywords != ''">
+                AND keywords LIKE concat('%', #{params.keywords}, '%')
+            </if>
+            <if test="params != null and params.projectDescription != null and params.projectDescription != ''">
+                AND project_description LIKE concat('%', #{params.projectDescription}, '%')
+            </if>
+            <if test="params != null and params.projectType != null and params.projectType.size > 0">
+                AND project_type IN
+                <foreach collection="params.projectType" item="type" open="(" separator="," close=")">
+                    #{type}
+                </foreach>
+            </if>
+            <if test="params != null and params.applicationArea != null and params.applicationArea.size > 0">
+                AND application_area IN
+                <foreach collection="params.applicationArea" item="type" open="(" separator="," close=")">
+                    #{type}
+                </foreach>
+            </if>
+            <if test="params != null and params.projectNature != null and params.projectNature.size > 0">
+                AND project_nature IN
+                <foreach collection="params.projectNature" item="type" open="(" separator="," close=")">
+                    #{type}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+    <select id="getProjectById" resultType="com.example.projectrecommend.entity.Project">
+        SELECT index_number, project_id, supervisor_name, email, project_title,
+               project_type, application_area, project_nature, keywords,
+               project_description, main_task1, main_task2, main_task3, main_task4,
+               outcome1, outcome2, outcome3, skills_required,
+               resources_required, how_challenging  FROM project WHERE project_id = #{id}
+    </select>
+
+</mapper>

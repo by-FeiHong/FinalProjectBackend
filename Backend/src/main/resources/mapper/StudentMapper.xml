@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.projectrecommend.dao.StudentDao">
+
+    <select id="findStudentProjects" resultType="com.example.projectrecommend.entity.Project">
+        SELECT p.index_number, p.project_id, p.supervisor_name, p.email, p.project_title,
+        p.project_type, p.application_area, p.project_nature, p.keywords,
+        p.project_description, p.main_task1, p.main_task2, p.main_task3, p.main_task4,
+        p.outcome1, p.outcome2, p.outcome3, p.skills_required,
+        p.resources_required, p.how_challenging  FROM project p
+        WHERE p.project_id IN (
+        <choose>
+            <when test="studentId != null and studentId != ''">
+                SELECT s.project0 FROM student s WHERE s.id = #{studentId} AND s.project0 IS NOT NULL
+                UNION
+                SELECT s.project1 FROM student s WHERE s.id = #{studentId} AND s.project1 IS NOT NULL
+                UNION
+                SELECT s.project2 FROM student s WHERE s.id = #{studentId} AND s.project2 IS NOT NULL
+                UNION
+                SELECT s.project3 FROM student s WHERE s.id = #{studentId} AND s.project3 IS NOT NULL
+                UNION
+                SELECT s.project4 FROM student s WHERE s.id = #{studentId} AND s.project4 IS NOT NULL
+                UNION
+                SELECT s.project5 FROM student s WHERE s.id = #{studentId} AND s.project5 IS NOT NULL
+                UNION
+                SELECT s.project6 FROM student s WHERE s.id = #{studentId} AND s.project6 IS NOT NULL
+                UNION
+                SELECT s.project7 FROM student s WHERE s.id = #{studentId} AND s.project7 IS NOT NULL
+                UNION
+                SELECT s.project8 FROM student s WHERE s.id = #{studentId} AND s.project8 IS NOT NULL
+                UNION
+                SELECT s.project9 FROM student s WHERE s.id = #{studentId} AND s.project9 IS NOT NULL
+            </when>
+            <otherwise>
+                SELECT NULL
+            </otherwise>
+        </choose>
+        )
+    </select>
+
+</mapper>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.projectrecommend.dao.SelectionDao">
+
+    <!-- 添加收藏 -->
+    <insert id="addSelection">
+        INSERT INTO student_selection(student_id, project_id, ranking)
+        VALUES(#{studentId}, #{projectId}, 0)
+    </insert>
+
+    <!-- 删除收藏 -->
+    <delete id="removeSelection">
+        DELETE FROM student_selection
+        WHERE student_id = #{studentId} AND project_id = #{projectId}
+    </delete>
+
+    <!-- 是否已收藏 -->
+    <select id="isSelected" resultType="int">
+        SELECT COUNT(*) FROM student_selection
+        WHERE student_id = #{studentId} AND project_id = #{projectId}
+    </select>
+
+    <!-- 更新排序 -->
+    <update id="updateRank" parameterType="com.example.projectrecommend.entity.Selection">
+        UPDATE student_selection
+        SET ranking = #{ranking}
+        WHERE student_id = #{studentId} AND project_id = #{projectId}
+    </update>
+
+    <!-- 获取学生收藏项目（带排序） -->
+    <select id="getSelectionsByStudentId" resultType="com.example.projectrecommend.entity.Selection">
+        SELECT * FROM student_selection WHERE student_id = #{studentId}
+    </select>
+
+
+    <!-- 用于推荐时查询收藏项目 -->
+    <select id="getSelectedProjectsByStudentId" resultMap="ProjectWithRankingMap">
+        SELECT p.*, s.ranking
+        FROM student_selection s
+                 JOIN project p ON s.project_id = p.project_id
+        WHERE s.student_id = #{studentId}
+    </select>
+
+    <select id="getProjectsWithRankingByStudentId" resultType="com.example.projectrecommend.entity.Project">
+        SELECT
+            p.*, s.ranking
+        FROM
+            student_selection s
+                JOIN
+            project p ON s.project_id = p.project_id
+        WHERE
+            s.student_id = #{studentId}
+    </select>
+
+    <!-- 映射 Project 实体类，包含 ranking 字段 -->
+    <resultMap id="ProjectWithRankingMap" type="com.example.projectrecommend.entity.Project">
+        <result property="indexNumber" column="index_number"/>
+        <result property="projectId" column="project_id"/>
+        <result property="supervisorName" column="supervisor_name"/>
+        <result property="email" column="email"/>
+        <result property="projectTitle" column="project_title"/>
+        <result property="projectType" column="project_type"/>
+        <result property="applicationArea" column="application_area"/>
+        <result property="projectNature" column="project_nature"/>
+        <result property="keywords" column="keywords"/>
+        <result property="projectDescription" column="project_description"/>
+        <result property="mainTask1" column="main_task1"/>
+        <result property="mainTask2" column="main_task2"/>
+        <result property="mainTask3" column="main_task3"/>
+        <result property="mainTask4" column="main_task4"/>
+        <result property="outcome1" column="outcome1"/>
+        <result property="outcome2" column="outcome2"/>
+        <result property="outcome3" column="outcome3"/>
+        <result property="skillsRequired" column="skills_required"/>
+        <result property="resourcesRequired" column="resources_required"/>
+        <result property="howChallenging" column="how_challenging"/>
+        <result property="ranking" column="ranking"/>
+    </resultMap>
+
+</mapper>
+
+

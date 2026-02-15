@@ -1,0 +1,16 @@
+INSERT INTO `student_selection` (`student_id`, `project_id`, `ranking`) VALUES ('123456001', 'A003', 0);
+INSERT INTO `student_selection` (`student_id`, `project_id`, `ranking`) VALUES ('123456001', 'A004', 0);
+INSERT INTO `student_selection` (`student_id`, `project_id`, `ranking`) VALUES ('123456001', 'A005', 0);
+INSERT INTO `student_selection` (`student_id`, `project_id`, `ranking`) VALUES ('123456001', 'AG002', 0);
+INSERT INTO `student_selection` (`student_id`, `project_id`, `ranking`) VALUES ('123456001', 'AG003', 0);
+INSERT INTO `student_selection` (`student_id`, `project_id`, `ranking`) VALUES ('123456001', 'AG004', 0);
+INSERT INTO `student_selection` (`student_id`, `project_id`, `ranking`) VALUES ('123456001', 'AG005', 0);
+INSERT INTO `student_selection` (`student_id`, `project_id`, `ranking`) VALUES ('123456001', 'DQ009', 0);
+INSERT INTO `student_selection` (`student_id`, `project_id`, `ranking`) VALUES ('123456002', 'AA001', 1);
+INSERT INTO `student_selection` (`student_id`, `project_id`, `ranking`) VALUES ('123456002', 'AC008', 3);
+INSERT INTO `student_selection` (`student_id`, `project_id`, `ranking`) VALUES ('123456002', 'AI008', 2);
+INSERT INTO `student_selection` (`student_id`, `project_id`, `ranking`) VALUES ('123456002', 'AM004', 4);
+INSERT INTO `student_selection` (`student_id`, `project_id`, `ranking`) VALUES ('123456005', 'A001', NULL);
+INSERT INTO `student_selection` (`student_id`, `project_id`, `ranking`) VALUES ('123456005', 'BT003', NULL);
+INSERT INTO `student_selection` (`student_id`, `project_id`, `ranking`) VALUES ('123456005', 'CJ001', NULL);
+INSERT INTO `student_selection` (`student_id`, `project_id`, `ranking`) VALUES ('123456005', 'S009', NULL);
